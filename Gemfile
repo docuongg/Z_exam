@@ -76,3 +76,5 @@ gem 'devise'
 gem 'omniauth'
 
 gem 'omniauth-google-oauth2'
+
+gem "webpacker"
