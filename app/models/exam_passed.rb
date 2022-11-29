@@ -1,0 +1,3 @@
+class ExamPassed < ApplicationRecord
+    
+end

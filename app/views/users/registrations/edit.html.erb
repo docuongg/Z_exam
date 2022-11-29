@@ -1,43 +1,67 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<section class="h-100 gradient-custom-2">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-lg-9 col-xl-7">
+        <div class="card">
+          <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
+            <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+                alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
+                style="width: 150px; z-index: 1">
+              <%# <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark"
+                style="z-index: 1;">
+                Edit profile
+              </button> %>
+            </div>
+            <div class="ms-3" style="margin-top: 130px;">
+              <%= link_to "Upload Image", edit_user_registration_path, class:"btn btn-primary"  %>
+              <p>Maximum size of 1MB. JPG, GIF or PNG</p>
+            </div>
+          </div>
+        </div>
+        <div class="p-4 text-black" style="background-color: #f8f9fa;">
+          <%# <h2>Edit <%= resource_name.to_s.humanize</h2> %>
+          <br/>
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+            <%= render "users/shared/error_messages", resource: resource %>
+            <div class="form-outline flex-fill mb-0">
+              <%= f.label :full_name, class:"form-label" %><br />
+              <%= f.text_field :full_name, autofocus: true, autocomplete: "full_name", class:"form-control"%>
+            </div>
+            <div class="form-outline flex-fill mb-0">
+              <%= f.label :username, class:"form-label" %><br />
+              <%= f.text_field :username, autofocus: true, autocomplete: "username", class:"form-control"%>
+            </div>
+            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+              <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+            <% end %>
+            <div class="form-outline flex-fill mb-0">
+              <%= f.label :password ,class:"form-label"%> <i>(leave blank if you don't want to change it)</i><br />
+              <%= f.password_field :password, autocomplete: "new-password", class:"form-control" %>
+              <% if @minimum_password_length %>
+                <em><%= @minimum_password_length %> characters minimum</em>
+              <% end %>
+            </div>
+            <div class="form-outline flex-fill mb-0">
+              <%= f.label :password_confirmation, class:"form-label" %><br />
+              <%= f.password_field :password_confirmation, autofocus: true, autocomplete: "username", class:"form-control"%>
+            </div>
+            <div class="form-outline flex-fill mb-0">
+              <%= f.label :current_password, class:"form-label" %><br />
+              <%= f.password_field :current_password, autofocus: true, autocomplete: "username", class:"form-control"%>
+            </div>
+            <br/>
+            <div class="d-flex justify-content-around">
+              <div class="mx-4 mb-3 mb-lg-4">
+                <%= f.submit "Update", class:"btn btn-outline-primary btn-lg"%>
+              </div>
+              <div class="mx-4 mb-3 mb-lg-4">
+                <%= link_to "Back", :back, class:"btn btn-outline-primary btn-lg"%>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+</section>
