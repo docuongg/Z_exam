@@ -3,3 +3,5 @@
 import "controllers"
 
 import "./bootstrap.min.js"
+import "./owl.carousel.min.js"
+import "./custom.js"

@@ -39,6 +39,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_29_031203) do
     t.string "name"
     t.string "description"
     t.integer "timeout"
+    t.string "thumbnail_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "tag_id", null: false
