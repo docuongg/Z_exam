@@ -90,3 +90,7 @@ gem "htmlbeautifier"
 gem 'dotenv-rails'
 
 gem 'faker'
+
+gem 'bootstrap-will_paginate'
+
+gem 'will_paginate'

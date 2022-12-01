@@ -1,5 +1,6 @@
 class Exam < ApplicationRecord
     has_many :exam_passeds, dependent: :destroy
-    belongs_to :tags
+    has_many :votes, dependent: :destroy
+    belongs_to :tag
 end
   
