@@ -1,23 +1,14 @@
 class PagesController < ApplicationController
   def home
-    # New exams
     @new_exams = Exam.new_exams
 
-    
-    # binding.pry
     if user_signed_in?
-      @user = current_user
-      sql1 = "select * from exam_passeds left join exams on exam_passeds.exam_id = exams.id where exam_passeds.user_id = #{@user.id}"
-      @completed_exams = ExamPassed.find_by_sql(sql1)
+      @completed_exams = Exam.completed_exams(@current_user.id).paginate(page: params[:page], per_page: 9)
       
-      sql2 = "select * from exams where tag_id in (select id from user_tags where user_id = #{@user.id})"
-      @suggestion_exams = Exam.find_by_sql(sql2)
+      @suggestion_exams = Exam.suggestion_exams(@current_user.id).paginate(page: params[:page], per_page: 9)
     end 
 
-    sql = "select * from exams join votes on exams.id = votes.exam_id group by exams.id order by count(exams.id) limit 5"
-    @popular_exams = Exam.find_by_sql(sql)
-    
-
-    
+    @popular_exams = Exam.popular_exams
+    @count_passed_exams_of_popular_exams = Exam.passed_exams_count
   end
 end

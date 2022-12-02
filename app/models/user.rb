@@ -34,7 +34,6 @@ validates :password,
   confirmation: true, 
   on: :update
 
-
   def login
     @login || self.username || self.email
   end

@@ -19,17 +19,9 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def show
-    @user = current_user
-    sql = "select * from tags where id in (select id from user_tags where user_id = #{@user.id})"
-    @tags = Tag.find_by_sql(sql)
-
-    #exams_passed
-    sql2 = "select * from exam_passeds where user_id = #{@user.id}"
-    @exams_passed = ExamPassed.find_by_sql(sql2)
-
-    #average_score
-    @avg_score = ExamPassed.where("user_id = #{current_user.id}").average(:score).round
-    
+    @tags_of_current_user = Tag.of(current_user.id)
+    @number_of_passed_exams = ExamPassed.number_of_passed_exams(current_user.id)
+    @avg_score = ExamPassed.avg_score_of_passed_exams(current_user.id)  
   end
 
   def after_sign_out_path_for(_resource_or_scope)
