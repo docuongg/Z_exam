@@ -1,8 +1,8 @@
 class PagesController < ApplicationController
   def home
     # New exams
-    @new_exams = Exam.order(:created_at).limit(5).includes(:tag)
-    end
+    @new_exams = Exam.new_exams
+
     
     # binding.pry
     if user_signed_in?
@@ -17,6 +17,7 @@ class PagesController < ApplicationController
     sql = "select * from exams join votes on exams.id = votes.exam_id group by exams.id order by count(exams.id) limit 5"
     @popular_exams = Exam.find_by_sql(sql)
     
+
     
   end
 end
