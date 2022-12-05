@@ -66,3 +66,26 @@ end
     # sql1 = "select * from exam_passeds
     # where user_id = #{@user.id}"
     # @completed_exams = ExamPassed.find_by_sql(sql1)
+
+(1..200).each do |id|
+    Question.create!(
+        title: Faker::Lorem.question(word_count: 6),
+        exam_id: rand(1..30)
+    )
+end
+
+(1..1000).each do |id|
+    Option.create!(
+        title: Faker::Lorem.paragraph(sentence_count: 2),
+        isCorrect: [true, false].sample,
+        question_id: rand(1..200)
+    )
+end
+
+(1..2000).each do |id|
+    Answer.create!(
+        option_id: rand(1...1000),
+        question_id: rand(1..200),
+        exam_passed_id: rand(1..40)
+    )
+end

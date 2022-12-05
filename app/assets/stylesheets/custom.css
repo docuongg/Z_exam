@@ -13,3 +13,21 @@
         height: 100%;
     }
 }
+
+/* countdown*/
+#countdown {
+    background-color: #aaa;
+}
+
+.a {
+    display: inline-block;
+    font-size: 1em;
+    list-style-type: none;
+    padding: 0.75em;
+    text-transform: uppercase;
+}
+  
+.a .b {
+    display: block;
+    font-size: 3rem;  
+}
