@@ -10,5 +10,5 @@ Rails.application.routes.draw do
   # devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   get 'exam/:id' => 'exams#detail', :as => 'detail_exam'
   get 'exam/do/:id' => 'exams#do', :as => 'do_exam'
-  post 'exam/mark' => 'exams#mark', :as => 'mark_exam'
+  post 'exam/mark/:id' => 'exams#mark', :as => 'mark_exam'
 end

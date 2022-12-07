@@ -4,4 +4,4 @@ class Question < ApplicationRecord
     belongs_to :exam 
 
     scope :get_questions_exam, ->id {where("exam_id = ?", id).includes(:exam, :options)}
-end
+end 

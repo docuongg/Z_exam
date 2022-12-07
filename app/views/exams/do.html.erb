@@ -25,7 +25,7 @@
     </ul>
   </div>
   <div class="col-md-8">
-    <%= form_tag url: {action: :create, controller: :registrations} do %>
+    <%= form_tag mark_exam_path(:id => "#{@exam.id}") do %>
       <div class="container mb-5">
         <% @questions.each_with_index do |question, index| %>
           <div class="row">
@@ -36,7 +36,7 @@
               <div class="row">
                 <% question.options.each do |option| %>
                   <div class="form-check col-6">
-                    <input class="form-check-input" type="checkbox" name="flexRadioDefault<%= question.id %>" id="flexRadioDefault<%= option.id %>">
+                    <input class="form-check-input" type="radio" name="<%= question.id %>" value="<%= option.id %>" id="flexRadioDefault<%= option.id %>">
                     <label class="form-check-label" for="flexRadioDefault<%= option.id %>">
                       <%= option.title %>
                     </label>
@@ -52,7 +52,7 @@
         <div class="row">
           <div class="col-12">
             <div style="z-index: 1; width: 150px;">
-              <%= link_to "Submit", mark_exam_path, method: "post", class:"btn btn-outline-primary d-flex justify-content-center"  %>
+              <button type="submit" class="btn btn-outline-primary d-flex justify-content-center">Submit</button>
             </div>
           </div>
         </div>

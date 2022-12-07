@@ -74,17 +74,20 @@ end
     )
 end
 
-(1..1000).each do |id|
-    Option.create!(
-        title: Faker::Lorem.paragraph(sentence_count: 2),
-        isCorrect: [true, false].sample,
-        question_id: rand(1..200)
-    )
+(1..200).each do |id|
+    a = rand(0..3)
+    (0..3).each do |b|
+        Option.create!(
+            title: Faker::Lorem.paragraph(sentence_count: 2),
+            isCorrect: a == b ? true : false,
+            question_id: id
+        )
+    end
 end
 
 (1..2000).each do |id|
     Answer.create!(
-        option_id: rand(1...1000),
+        option_id: rand(1...800),
         question_id: rand(1..200),
         exam_passed_id: rand(1..40)
     )
