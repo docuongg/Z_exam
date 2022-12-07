@@ -7,11 +7,12 @@
       </div>
       <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <%= render "users/shared/error_messages", resource: resource %>
           <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
             <p class="lead fw-normal mb-0 me-3">Sign in with</p>
-            <button type="button" class="btn btn-primary btn-floating mx-1">
-              <i class="fab fa-facebook-f"></i>
-            </button>
+            <div class="btn btn-primary btn-floating mx-1">
+              <%= link_to "abc", user_google_oauth2_omniauth_authorize_path %>
+            </div>
             <button type="button" class="btn btn-primary btn-floating mx-1">
               <i class="fab fa-twitter"></i>
             </button>
@@ -24,8 +25,8 @@
           </div>
           <%# Email %>
           <div class="form-outline mb-3 field">
-            <%= f.label :email, class:"form-label"%><br />
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control form-control-lg", placeholder:"Enter a valid email address" %>
+            <%= f.label :login, class:"form-label"%><br />
+            <%= f.text_field :login, autofocus: true, autocomplete: "email", class:"form-control form-control-lg", placeholder:"Enter a valid email address" %>
           </div>
           <div class="form-outline mb-3 field">
             <%= f.label :password, class:"form-label" %><br />
@@ -47,7 +48,6 @@
                 <%= f.check_box :remember_me, class:"form-check-input me-2" %>
                 <%= f.label :remember_me, class:"form-check-label" %>
               </div>
-              <%# <%= render "users/shared/links", class:"text-body" %>
               <%# <a href="#!" class="text-body">Forgot password?</a> %>
             </div>
           <% end %>

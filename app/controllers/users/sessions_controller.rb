@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Users::SessionsController < Devise::SessionsController
-  # before_action :configure_sign_in_params, only: [:create]
+  before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
   def new
@@ -9,19 +9,32 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  def create
+    super
+  end
 
   # DELETE /resource/sign_out
-  # def destroy
-  #   super
-  # end
+  def destroy
+    super
+  end
 
+  def show
+    @tags_of_current_user = Tag.of(current_user.id)
+    @number_of_passed_exams = current_user.exam_passeds.number_of_passed_exams
+    @avg_score = current_user.exam_passeds.avg_score_of_passed_exams  
+  end
+
+  def after_sign_out_path_for(_resource_or_scope)
+    new_user_session_path
+  end
+
+  def after_sign_out_path_for(_resource_or_scope)
+    stored_location_for(resource_or_scope) || root_path
+  end
   # protected
 
   # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_in_params
-  #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
-  # end
+  def configure_sign_in_params
+    devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
+  end
 end
