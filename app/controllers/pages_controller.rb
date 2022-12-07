@@ -3,7 +3,7 @@ class PagesController < ApplicationController
     @new_exams = Exam.new_exams
 
     if user_signed_in?
-      @completed_exams = Exam.completed_exams(@current_user.id).paginate(page: params[:page], per_page: 9)
+      @completed_exams = current_user.exams.completed_exams.paginate(page: params[:page], per_page: 9)
       
       @suggestion_exams = Exam.suggestion_exams(@current_user.id).paginate(page: params[:page], per_page: 9)
     end 
