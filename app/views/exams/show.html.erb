@@ -1,29 +1,25 @@
-<%# <h1 class="my-4">Page Heading
-  <small>Secondary Text</small>
-</h1> %>
-<!-- Portfolio Item Row -->
 <br/>
 <br/>
 <div class="row">
   <div class="col-md-4">
-    <img class="img-fluid img-thumbnail w-100" src= <%= @detail_exam.thumbnail_url %> alt="">
+    <img class="img-fluid img-thumbnail w-100" src= <%= @exam.thumbnail_url %> alt="">
   </div>
   <div class="col-md-8">
     <ul class="list-unstyled list-inline mb-0 d-flex">
-      <h3 class="my-3"><%= @detail_exam.name %></h3>
-      <li class="chip bg-primary text-white me-0 m-3 rounded p-2 my-3 "><%= @detail_exam.tag.name%></li>
+      <h3 class="my-3"><%= @exam.name %></h3>
+      <li class="chip bg-primary text-white me-0 m-3 rounded p-2 my-3 "><%= @exam.tag.name%></li>
     </ul>
-    <p><%= @detail_exam.description %></p>
+    <p><%= @exam.description %></p>
     <hr class="mt-0 mb-4">
     <h3 class="my-3">Exam Details</h3>
     <ul>
       <li>Dolor Sit Amet</li>
-      <li>Timeout : <%= @detail_exam.timeout %> minutes</li>
+      <li>Timeout : <%= @exam.timeout %> minutes</li>
       <li>Consectetur</li>
       <li>Adipiscing Elit</li>
     </ul>
     <div style="z-index: 1; width: 150px;">
-      <%= link_to "Start now", do_exam_path(:id => "#{@detail_exam.id}"), class:"btn btn-outline-primary d-flex justify-content-center"  %>
+      <%= link_to "Start now", new_exam_exam_passed_path(@exam.id), class:"btn btn-outline-primary d-flex justify-content-center"  %>
     </div>
   </div>
 </div>

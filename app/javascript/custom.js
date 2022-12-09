@@ -26,12 +26,3 @@ $('.nonloop').owlCarousel({
     }
 });
 
-// rating
-$('input').rating({
-    start: 5,
-    stop: 10
-  });
-
-  $('input').on('change', function () {
-    alert('Rating: ' + $(this).val());
-  });

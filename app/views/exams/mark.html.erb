@@ -2,3 +2,6 @@
 <input type="hidden" class="rating" value="2"/>
 <input type="hidden" class="rating" disabled="disabled"/>
 <input type="hidden" class="rating" data-readonly/>
+<div style="z-index: 1; width: 150px;">
+  <%= link_to "View Result", result_exam_path(:id => "#{@exam.id}"), class:"btn btn-outline-primary d-flex justify-content-center"  %>
+</div>

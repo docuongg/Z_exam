@@ -1,0 +1,64 @@
+<br/>
+<br/>
+<div class="row">
+  <div class="col-md-4">
+    <ul class="list-unstyled list-inline mb-0 d-flex">
+      <h3 class="my-3"><%= @exam_passed.exam.name %></h3>
+    </ul>
+    <hr class="mt-0 mb-4">
+    <div id="countdown">
+      <ul>
+        <li class="a"><span class="b" id="hours"></span>Hours</li>
+        <li class="a"><span class="b" id="minutes"></span>Minutes</li>
+        <li class="a"><span class="b" id="seconds"></span>Seconds</li>
+      </ul>
+    </div>
+    <h3 class="my-3">Exam Details</h3>
+    <ul>
+      <li>Dolor Sit Amet</li>
+      <li>Timeout : 
+        <span class="b" id="timeout"><%= @exam_passed.exam.timeout %></span>
+        minutes
+      </li>
+      <li>Consectetur</li>
+      <li>Adipiscing Elit</li>
+    </ul>
+  </div>
+  <div class="col-md-8">
+    <%= form_for @exam_passed, url: {action: :create, controller: :exam_passeds} do |f|%>
+      <div class="container mb-5">
+        <% @exam_passed.exam.questions.each_with_index do |question, index| %>
+          <div class="row">
+            <div class="col-12">
+              <p class="fw-bold mt-5">
+                <%= index+1 %>. <%= question.title %>
+              </p>
+              <div class="row">
+                <% question.options.each do |option| %>
+                  <div class="form-check col-6">
+                    <%= f.fields_for :answer do |ff| %>
+                      <%= ff.hidden_field :question_id, value: question.id %>
+                      <%= ff.radio_button :option_id, option.id %>
+                      <label for=<%= "exam_passed_answer_option_id_#{option.id}"%> >
+                        <%= option.title %>
+                      </label>
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <br/>
+        <div class="row">
+          <div class="col-12">
+            <div style="z-index: 1; width: 150px;">
+              <%= f.submit "Submit", class:"btn btn-outline-primary d-flex justify-content-center"%>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+</div>
