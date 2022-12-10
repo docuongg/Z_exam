@@ -5,8 +5,7 @@ class ExamPassedsController < ApplicationController
     end
 
     def create
-        @exam_passed = current_user.exam_passeds.build(exam_passed_params)
-        binding.pry
+        @exam_passed = ExamPassed.new(exam_passed_params)
         if @exam_passed.save()
             redirect_to new_exam_exam_passed_vote_path(@exam_passed.id)
         else
