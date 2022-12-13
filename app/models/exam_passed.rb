@@ -10,21 +10,23 @@ class ExamPassed < ApplicationRecord
     scope :number_of_passed_exams, ->  {count}
     scope :avg_score_of_passed_exams, -> {average(:score).round}
 
+    before_save :set_score, :set_name, :set_finish_time
+
     private
 
     def set_score
-        @exam = Exam.get_info_exam(params[:id])
-        @correct_option = Option.get_correct_option(params[:id])
-        @correct_option_array = @correct_option.map do |o|
-            o.id
-        end
-        @questions = Question.get_questions_exam(params[:id])
-        @user_option_array = @questions.map do |q|
-            params["#{q.id}"]
-        end
-        @user_option_array = @user_option_array.reject(&:nil?).map(&:to_i)
+        @correct_option = Option.get_correct_option(exam_id)
 
-        @correct_option_user = @user_option_array & @correct_option_array
+        option_array = @correct_option.size == answers.size && @correct_option.map(&:id) & answers.map(&:option_id)
+
+        self.score = (option_array.length*1.0 / @correct_option.length * 100 ).round
     end
 
+    def set_name
+        self.name = Exam.find(exam_id).name
+    end
+
+    def set_finish_time
+        self.finishAt = Time.now()
+    end
 end

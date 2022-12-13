@@ -36,29 +36,27 @@
               <div class="row">
                 <%= f.fields_for :answers, Answer.new(question: question) do |ff| %>
                   <% question.options.each do |option| %>
-                    <div class="form-check col-6">
+                    <div class="form-check col-6 ">
                       <%= ff.hidden_field :question_id, value: question.id %>
-                      <%= ff.radio_button :option_id, option.id %>
-                      <label for=<%= "exam_passed_answer_option_id_#{option.id}"%> >
-                        <%= option.title %>
-                      </label>
-                    </div>
+                      <%= ff.radio_button :option_id, option.id, class:"form-check-input" %>
+                      <label for=<%="exam_passed_answers_attributes_#{index}_option_id_#{option.id}" %>><%= option.title%></label>
+                      </div>
+                    <% end %>
                   <% end %>
-                <% end %>
+                </div>
               </div>
             </div>
-          </div>
-        <% end %>
-        <br/>
-        <div class="row">
-          <div class="col-12">
-            <div style="z-index: 1; width: 150px;">
-              <%= f.submit "Submit", class:"btn btn-outline-primary d-flex justify-content-center"%>
+          <% end %>
+          <br/>
+          <div class="row">
+            <div class="col-12">
+              <div style="z-index: 1; width: 150px;">
+                <%= f.submit "Submit", class:"btn btn-outline-primary d-flex justify-content-center"%>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  <% end %>
-</div>
+    <% end %>
+  </div>
 </div>
