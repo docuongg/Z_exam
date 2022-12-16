@@ -58,7 +58,8 @@ end
     Vote.create!(
         rate: rand(1..10),
         comment: Faker::Movie.quote,
-        exam_id: rand(1..30)
+        exam_id: rand(1..30),
+        user_id: rand(1..20)
     )
 end
 

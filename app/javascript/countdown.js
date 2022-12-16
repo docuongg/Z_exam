@@ -3,29 +3,30 @@
           minute = second * 60,
           hour = minute * 60,
           day = hour * 24;
-  
-    //I'm adding this section so I don't have to keep updating this pen every year :-)
-    //remove this if you don't need it
-    
-    var distance = document.getElementById("timeout").innerText*60*1000
-    
-    
-        x = setInterval(function() {    
-  
-            
-            distance = distance - 1000;
-            
-            document.getElementById("hours").innerText = Math.floor((distance % (day)) / (hour)),
-            document.getElementById("minutes").innerText = Math.floor((distance % (hour)) / (minute)),
-            document.getElementById("seconds").innerText = Math.floor((distance % (minute)) / second);
-  
-          //do something later when date is reached
-          if (distance < 0) {
-            document.getElementById("headline").innerText = "It's my birthday!";
-            document.getElementById("countdown").style.display = "none";
-            document.getElementById("content").style.display = "block";
-            clearInterval(x);
+        submitB = document.getElementById("submitExam")
+        var x = setInterval(function() {  
+          let exam_id = document.getElementById('mycontainer').dataset.name;
+          if (localStorage.getItem(`exam_${exam_id}`)) {
+            create_time = localStorage.getItem(`exam_${exam_id}`);
+          } else {
+            var create_time = document.getElementById('mycontainer').dataset.source
+            create_time = Math.round(create_time)
+            localStorage.setItem(`exam_${exam_id}`, create_time);
           }
-          //seconds
+      
+          var distance = document.getElementById("timeout").innerText*60*1000
+          var countdown = 0
+
+            
+            countdown = distance - (Date.now() - create_time*1000)
+            if (countdown < 0) {
+              localStorage.removeItem(`exam_${exam_id}`);
+              submitB.click();
+              clearInterval(x);
+            }
+            document.getElementById("hours").innerText = Math.floor((countdown % (day)) / (hour)),
+            document.getElementById("minutes").innerText = Math.floor((countdown % (hour)) / (minute)),
+            document.getElementById("seconds").innerText = Math.floor((countdown % (minute)) / second);
+
         }, 1000)
     }());

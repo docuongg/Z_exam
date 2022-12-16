@@ -1,0 +1,65 @@
+<br/>
+<br/>
+<div class="row">
+  <div class="col-md-4">
+    <ul class="list-unstyled list-inline mb-0 d-flex">
+      <h3 class="my-3"><%= @exam_passed.name %></h3>
+    </ul>
+    <hr class="mt-0 mb-4">
+    <h3 class="my-3">Exam Result</h3>
+    <ul>
+      <li>Score : 
+        <%= @exam_passed.score %>/100
+      </li>
+      <li>Timeout : 
+        <span class="b" id="timeout"><%= @exam_passed.exam.timeout %></span>
+        minutes
+      </li>
+      <li>Start at :  <%= @exam_passed.created_at.strftime("%-d/%-m/%y: %H:%M %Z") %></li>
+      <li>Finish at :  <%= @exam_passed.updated_at.strftime("%-d/%-m/%y: %H:%M %Z") %></li>
+    </ul>
+    <div style="z-index: 1; width: 150px;">
+      <%= link_to "Back to home", root_path, class:"btn btn-outline-primary d-flex justify-content-center"  %>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="container mb-5">
+      <% @exam_passed.exam.questions.each_with_index do |question, index| %>
+        <div class="row">
+          <div class="col-12">
+            <p class="fw-bold mt-5">
+              <%= index+1 %>. <%= question.title %>
+            </p>
+            <div class="row">
+              <% question.options.each do |option| %>
+                <div class="form-check col-6 ">
+                  <% if @exam_passed.answers.map(&:option_id).include? option.id %>
+                    <input class="form-check-input" type="radio" value="" id="flexCheckDefault" checked disabled>
+                    <label class="form-check-label" for="flexCheckDefault"
+                        <% if option.isCorrect == true %>
+                            style="color:green;" 
+                        <% else %>
+                            style="color:red;" 
+                        <% end %>   
+                    >
+                      <%= option.title%>
+                    </label>
+                  <% else %>
+                    <input class="form-check-input" type="radio" value="" id="flexCheckDefault" disabled>
+                    <label class="form-check-label" for="flexCheckDefault"
+                        <% if option.isCorrect == true %>
+                            style="color:green;" 
+                        <% end %>
+                    >
+                      <%= option.title%>
+                    </label>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

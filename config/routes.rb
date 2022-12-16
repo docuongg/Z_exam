@@ -7,8 +7,9 @@ Rails.application.routes.draw do
   end
 
   resources :exams do
-    resources :exam_passeds 
-    resources :votes 
+    resources :exam_passeds do
+      resources :votes 
+    end
   end
   # devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   # devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }

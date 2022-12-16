@@ -1,1 +1,28 @@
-haha
+<br/>
+<h3>You have completed this exam</h3>
+<p>Your evaluation will help our development</p>
+<%# <%= binding.pry %>
+<div>
+  <div class="row">
+    <p>Rate us !</p>
+    <p class="star-rating">
+      <i class="my-star star-1" data-star="1"></i>
+      <i class="my-star star-2" data-star="2"></i>
+      <i class="my-star star-3" data-star="3"></i>
+      <i class="my-star star-4" data-star="4"></i>
+      <i class="my-star star-5" data-star="5"></i>
+    </p>
+  </div>
+  <div class="form-row">
+    <div class="col-md-4 mb-3">
+      <%= form_for @vote, url: exam_exam_passed_votes_path(exam_passed_id: params[:exam_passed_id], exam_id: params[:exam_id]) do |f|%>
+        <%= f.hidden_field :rate, id:"rate"  %>
+        <%= f.label :comment, class:"mb-2" %>
+        <%= f.text_area :comment, class:"form-control p-2"%>
+        <div style="z-index: 1; width: 150px;">
+          <%= f.submit "Review And View Result", class:"mt-2 btn btn-outline-primary d-flex justify-content-center"%>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

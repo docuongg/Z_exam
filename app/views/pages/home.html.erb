@@ -125,18 +125,18 @@
                 <%= will_paginate @completed_exams %>
                 <% @completed_exams.each_slice(3) do |group|%>
                   <div class="row g-3 " >
-                    <% group.each do |exam| %>
+                    <% group.each do |exam_passed| %>
                       <div class="col-4">
                         <div class="card">
                           <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                            <%= link_to exam_path(exam.id) do %>
-                              <img class="img-fluid img-thumbnail w-100" src=<%= exam.thumbnail_url%>  />
+                            <%= link_to exam_exam_passed_path(exam_passed.exam.id, exam_passed.id ) do %>
+                              <img class="img-fluid img-thumbnail w-100" src=<%= exam_passed.exam.thumbnail_url%>  />
                               <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                             <% end %>
                           </div>
                           <div class="card-body">
-                            <h5 class="card-title font-weight-bold"><a><%= exam.name%>
-                                ( <%= exam.exam_passeds[0].score%> )
+                            <h5 class="card-title font-weight-bold"><a><%= exam_passed.exam.name%>
+                                ( <%= exam_passed.score %>)
                               </a></h5>
                             <ul class="list-unstyled list-inline mb-0 d-flex justify-content-between">
                               <div class="d-flex align-self-center">
@@ -156,11 +156,11 @@
                                   <i class="fas fa-star-half-alt text-warning fa-xs"></i>
                                 </div>
                               </div>
-                              <li class="chip bg-primary text-white me-0 rounded p-2"><%= exam.tag.name%></li>
+                              <li class="chip bg-primary text-white me-0 rounded p-2"><%= exam_passed.exam.tag.name%></li>
                             </ul>
                             <hr class="my-4" />
                             <p class="card-text">
-                              <%= exam.description%>
+                              <%= exam_passed.exam.description%>
                             </p>
                           </div>
                         </div>
