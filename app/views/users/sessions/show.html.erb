@@ -18,7 +18,7 @@
           <div class="p-4 text-black" style="background-color: #f8f9fa;">
             <div class="d-flex justify-content-end text-center py-1">
               <div>
-                <p class="mb-1 h5"><%= @number_of_passed_exams %></p>
+                <p class="mb-1 h5"><%= @number_passed_exams %></p>
                 <p class="small text-muted mb-0">Exams Passed</p>
               </div>
               <div class="px-3">
@@ -31,7 +31,7 @@
             <div class="mb-5">
               <p class="lead fw-normal mb-1">Interested</p>
               <div class="p-4" style="background-color: #f8f9fa;">
-                <% @tags_of_current_user.each do |tag|%>
+                <% @current_user_tags.each do |tag|%>
                   <p class="font-italic mb-1"><%= tag.name %></p>
                 <% end %>
               </div>

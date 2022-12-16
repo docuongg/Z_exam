@@ -5,11 +5,11 @@ class ExamPassed < ApplicationRecord
     has_many :questions, through: :exam
     has_many :answers
     
-    accepts_nested_attributes_for :answers, reject_if: lambda { |c| c[:option_id].blank? }
+    accepts_nested_attributes_for :answers, reject_if: -> answer { answer[:option_id].blank? }
     
-    scope :number_of_passed_exams, -> {count}
-    scope :avg_score_of_passed_exams, -> {average(:score).round}
-    scope :best_completed_exams, -> {group(:exam_id).having('Max(score) >= score')}
+    scope :number_passed_exams, -> {count}
+    scope :passed_exams_avg_score, -> {average(:score).round}
+    scope :best_completed_exams, -> {group(:exam_id).having('MAX(score) >= score')}
     
     before_save :set_name
     before_update :set_score

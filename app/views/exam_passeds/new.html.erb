@@ -41,7 +41,6 @@
     <div id="clock1">
     </div>
   </div>
-  <%# <% binding.pry %>
   <div class="col-md-8" style="height: 83vh; overflow-y: scroll">
     <%= form_for @exam_passed, url: exam_exam_passed_path(@exam_passed.exam.id, @exam_passed.id) do |f|%>
       <%= f.hidden_field :finishAt, value: Time.now() %>
@@ -57,7 +56,7 @@
                   <% question.options.each_with_index do |option, o_index| %>
                     <div class="form-check col-6 ">
                       <%= ff.hidden_field :question_id, value: question.id %>
-                      <%= ff.radio_button :option_id, option.id, class:"form-check-input", onclick:"myFunction(#{index}, #{option.id}, #{question.id})" %>
+                      <%= ff.radio_button :option_id, option.id, class:"form-check-input" %>
                       <label for=<%="exam_passed_answers_attributes_#{index}_option_id_#{option.id}" %>><%= option.title%></label>
                       </div>
                     <% end %>
@@ -80,17 +79,15 @@
   </div>
 </div>
 <script>
-  function myFunction(index, option_id, question_id) {
-    var checkBox = document.getElementById(`exam_passed_answers_attributes_${index}_option_id_${option_id}`);
+  $(".form-check-input").click(function() {
+    var questionId = $(this).prev().val()
 
-    var box = document.getElementById(`box-${question_id}`);
+    var box = $(`#box-${questionId}`);
 
-    if (checkBox.checked == true){
-      box.style.backgroundColor = "#000";
-    } else {
-      text.style.display = "none";
+    if (this.checked == true){
+      box.css({"background-color" :  "#000"});
     }
-  }
+  })
 </script>
 <%= javascript_include_tag('jquery.countdown.min.js') %>
 <%= javascript_include_tag('countdown.js') %>
