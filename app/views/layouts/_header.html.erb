@@ -6,7 +6,14 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <form class="d-flex me-auto " action="/search" method="GET">
-        <input class="form-control me-2" type="search" placeholder="Search" name="key" aria-label="Search" value=<%= params["key"]%> >
+        <input class="form-control me-2 w-50" type="search" placeholder="Search" name="key" aria-label="Search" value=<%= @prev_search_key%> >
+        <%= select_tag('tag', options_for_select(
+            ["All"] + @tags.map do |tag| 
+              ([tag.name, tag.id])
+            end,
+            @prev_search_tag || 'All'
+          ), class:"form-select w-25 me-2"
+        ) %>
         <button class="btn btn-outline-primary" type="submit">Search</button>
       </form>
       <ul class="navbar-nav mb-2 mb-lg-0">

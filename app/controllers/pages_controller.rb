@@ -1,8 +1,14 @@
 class PagesController < ApplicationController
   def home
     @tags = Tag.all
-    if params[:key]
-      @exams = Exam.find_by_name(params[:key]).paginate(page: params[:page], per_page: 9)   
+    if !search_params.blank?
+      @prev_search_tag = params[:tag]
+      @prev_search_key = params[:key]
+      if params[:tag] == "All"
+        @exams = Exam.find_by_name(params[:key]).paginate(page: params[:page], per_page: 9)   
+      else
+        @exams = Exam.search(search_params).paginate(page: params[:page], per_page: 9)   
+      end
     else
       @new_exams = Exam.new_exams
 
@@ -17,7 +23,8 @@ class PagesController < ApplicationController
   end
 
   private
-  # def exam_params
-  #   params.require(:).permit(:key)
-  # end
+
+  def search_params
+    params.permit([:key, :tag])
+  end
 end

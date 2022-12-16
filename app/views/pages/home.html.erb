@@ -180,8 +180,10 @@
               <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col col-lg-12 col-xl-12">
                   <h3>Completed Exam</h3>
+                  <div class="digg_pagination">
+                    <%= will_paginate @completed_exams %>
+                  </div>
                   <br/>
-                  <%= will_paginate @completed_exams %>
                   <% @completed_exams.each_slice(3) do |group|%>
                     <div class="row g-3 " >
                       <% group.each do |exam| %>

@@ -9,7 +9,7 @@ class Exam < ApplicationRecord
     scope :completed_exams, ->{includes(:tag)}
     scope :passed_exams_count, -> {joins(:votes).group(:id).count}
 
-    scope :find_by_name, ->key {where("name LIKE ?", "%#{key}%").includes(:tag)}
-
+    scope :search, -> params {where("name LIKE ? AND tag_id = ?", "%#{params["key"]}%", "#{params["tag"]}")}
+    scope :find_by_name, -> name {where("name LIKE ?", "%#{name}%")}
 end
   
