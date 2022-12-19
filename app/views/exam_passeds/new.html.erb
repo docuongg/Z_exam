@@ -9,9 +9,9 @@
     <%= content_tag :div, '', id: 'mycontainer', data: { source: @exam_passed.created_at.to_f, name: @exam_passed.exam.name } %>
     <div id="countdown" style="margin-right: -12px; margin-left: -12px">
       <ul>
-        <li class="a"><span class="b" id="hours"></span>Hours</li>
-        <li class="a"><span class="b" id="minutes"></span>Minutes</li>
-        <li class="a"><span class="b" id="seconds"></span>Seconds</li>
+        <li class="countdown-li"><span class="countdown-span" id="hours"></span>Hours</li>
+        <li class="countdown-li"><span class="countdown-span" id="minutes"></span>Minutes</li>
+        <li class="countdown-li"><span class="countdown-span" id="seconds"></span>Seconds</li>
       </ul>
     </div>
     <hr class="mt-0 mb-4">

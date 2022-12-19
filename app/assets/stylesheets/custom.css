@@ -19,7 +19,7 @@
     background-color: #ccc;
 }
 
-.a {
+.countdown-li {
     display: inline-block;
     font-size: 1em;
     list-style-type: none;
@@ -27,7 +27,7 @@
     text-transform: uppercase;
 }
   
-.a .b {
+.countdown-li .countdown-span {
     display: block;
     font-size: 3rem;  
 }
