@@ -1,0 +1,93 @@
+<br/>
+<br/>
+<div class="row">
+  <div class="col-md-4">
+    <ul class="list-unstyled list-inline mb-0 d-flex">
+      <h3 class="my-3"><%= @exam_passed.exam.name %></h3>
+    </ul>
+    <hr class="mt-0 mb-4 ">
+    <%= content_tag :div, '', id: 'mycontainer', data: { source: @exam_passed.created_at.to_f, name: @exam_passed.exam.name } %>
+    <div id="countdown" style="margin-right: -12px; margin-left: -12px">
+      <ul>
+        <li class="countdown-li"><span class="countdown-span" id="hours"></span>Hours</li>
+        <li class="countdown-li"><span class="countdown-span" id="minutes"></span>Minutes</li>
+        <li class="countdown-li"><span class="countdown-span" id="seconds"></span>Seconds</li>
+      </ul>
+    </div>
+    <hr class="mt-0 mb-4">
+    <% @exam_passed.exam.questions.each_slice(6).with_index do |group, index| %>
+      <div class="row pt-3" style="background-color: #ccc;">
+        <% group.each_with_index do |g, g_index| %>
+          <div class="col-2 d-flex">
+            <p><%= 6*index + g_index + 1%>. </p>
+            <div class="ms-1" id=<%= "box-#{g.id}"%>  style="background-color: #fff;width: 24px; height: 24px;">
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+    <br/>
+    <hr class="mt-0 mb-4">
+    <h3 class="my-3">Exam Details</h3>
+    <ul>
+      <li>Dolor Sit Amet</li>
+      <li>Timeout : 
+        <span class="b" id="timeout"><%= @exam_passed.exam.timeout %></span>
+        minutes
+      </li>
+      <li>Consectetur</li>
+      <li>Adipiscing Elit</li>
+    </ul>
+    <div id="clock1">
+    </div>
+  </div>
+  <div class="col-md-8" style="height: 83vh; overflow-y: scroll">
+    <%= form_for @exam_passed, url: exam_exam_passed_path(@exam_passed.exam.id, @exam_passed.id) do |f|%>
+      <%= f.hidden_field :finishAt, value: Time.now() %>
+      <div class="container mb-5">
+        <% @exam_passed.exam.questions.each_with_index do |question, index| %>
+          <div class="row">
+            <div class="col-12">
+              <p class="fw-bold mt-5">
+                <%= index+1 %>. <%= question.title %>
+              </p>
+              <div class="row">
+                <%= f.fields_for :answers, Answer.new(question: question) do |ff| %>
+                  <% question.options.each_with_index do |option, o_index| %>
+                    <div class="form-check col-6 ">
+                      <%= ff.hidden_field :question_id, value: question.id %>
+                      <%= ff.radio_button :option_id, option.id, class:"form-check-input" %>
+                      <label for=<%="exam_passed_answers_attributes_#{index}_option_id_#{option.id}" %>><%= option.title%></label>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+          <br/>
+          <div class="row">
+            <div class="col-12">
+              <div style="z-index: 1; width: 150px;">
+                <%= f.submit "Submit", class:"btn btn-outline-primary d-flex justify-content-center", id:"submitExam" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<script>
+  $(".form-check-input").click(function() {
+    var questionId = $(this).prev().val()
+
+    var box = $(`#box-${questionId}`);
+
+    if (this.checked == true){
+      box.css({"background-color" :  "#000"});
+    }
+  })
+</script>
+<%= javascript_include_tag('jquery.countdown.min.js') %>
+<%= javascript_include_tag('countdown.js') %>

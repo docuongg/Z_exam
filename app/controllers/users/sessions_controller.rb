@@ -19,9 +19,9 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def show
-    @tags_of_current_user = Tag.of(current_user.id)
-    @number_of_passed_exams = current_user.exam_passeds.number_of_passed_exams
-    @avg_score = current_user.exam_passeds.avg_score_of_passed_exams  
+    @current_user_tags = current_user.tags
+    @number_passed_exams = current_user.exam_passeds.number_passed_exams
+    @avg_score = current_user.exam_passeds.passed_exams_avg_score  
   end
 
   def after_sign_out_path_for(_resource_or_scope)

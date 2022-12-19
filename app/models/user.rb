@@ -2,6 +2,8 @@ class User < ApplicationRecord
   has_many :exam_passeds, dependent: :destroy
   has_many :user_tags, dependent: :destroy
   has_many :exams, through: :exam_passeds
+  has_many :votes, dependent: :destroy
+  has_many :tags, through: :user_tags
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :omniauthable, :database_authenticatable, :registerable,
@@ -11,7 +13,9 @@ class User < ApplicationRecord
   attr_writer :login
   validates :username, presence: true, uniqueness: { case_sensitive: false }
   validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
-
+  
+  scope :completed_exams, -> {exam_passeds.order(:score).group(:exam_id)}
+  
   PASSWORD_FORMAT = /\A
   (?=.{8,})          # Must contain 8 or more characters
   (?=.*\d)           # Must contain a digit

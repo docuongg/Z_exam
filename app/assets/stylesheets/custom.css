@@ -13,3 +13,42 @@
         height: 100%;
     }
 }
+
+/* countdown*/
+#countdown {
+    background-color: #ccc;
+}
+
+.countdown-li {
+    display: inline-block;
+    font-size: 1em;
+    list-style-type: none;
+    padding: 0.75em;
+    text-transform: uppercase;
+}
+  
+.countdown-li .countdown-span {
+    display: block;
+    font-size: 3rem;  
+}
+
+.star-rating{
+    color: #bebebe;
+    font-size:2em;
+}
+/*create the star*/
+.my-star::before{
+    content:"\002605";
+}
+/*remove the default style (italic) of the star*/
+.my-star{
+    font-style: unset !important;
+}
+/*set active star color*/
+.is-active{
+    color:#fb8900;
+}
+/*set color on hover*/
+.my-star:not(.is-active):hover{
+    color: #fb8900;
+}

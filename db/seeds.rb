@@ -58,7 +58,8 @@ end
     Vote.create!(
         rate: rand(1..10),
         comment: Faker::Movie.quote,
-        exam_id: rand(1..30)
+        exam_id: rand(1..30),
+        user_id: rand(1..20)
     )
 end
 
@@ -66,3 +67,29 @@ end
     # sql1 = "select * from exam_passeds
     # where user_id = #{@user.id}"
     # @completed_exams = ExamPassed.find_by_sql(sql1)
+
+(1..200).each do |id|
+    Question.create!(
+        title: Faker::Lorem.question(word_count: 6),
+        exam_id: rand(1..30)
+    )
+end
+
+(1..200).each do |id|
+    a = rand(0..3)
+    (0..3).each do |b|
+        Option.create!(
+            title: Faker::Lorem.paragraph(sentence_count: 2),
+            isCorrect: a == b ? true : false,
+            question_id: id
+        )
+    end
+end
+
+(1..2000).each do |id|
+    Answer.create!(
+        option_id: rand(1...800),
+        question_id: rand(1..200),
+        exam_passed_id: rand(1..40)
+    )
+end

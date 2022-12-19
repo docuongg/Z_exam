@@ -2,11 +2,14 @@ class Exam < ApplicationRecord
     belongs_to :tag
     has_many :exam_passeds, dependent: :destroy
     has_many :votes, dependent: :destroy
+    has_many :questions, dependent: :destroy
 
-    scope :new_exams, ->{order(:created_at).limit(5).includes(:tag)}
-    scope :popular_exams, ->{joins(:votes).group(:id).order("COUNT(exams.id) DESC").limit(5).includes(:tag)}
-    scope :suggestion_exams, -> id{where("tag_id in (select id from user_tags where user_id = ? )", id).includes(:tag)}
-    scope :completed_exams, ->{includes(:tag)}
-    scope :passed_exams_count, -> {joins(:votes).group(:id).count}
+    scope :new_exams, ->{order(:created_at)}
+    scope :popular_exams, ->{joins(:votes).group(:id).order("COUNT(exams.id) DESC")}
+    scope :suggestion_exams, -> {where("tag_id IN (SELECT id FROM user_tags WHERE user_id = ? )", id)}
+    scope :by_id, -> ids {where(tag_id: ids)}
+
+    scope :passed_exams_count, -> {joins(:votes).group(:id).order("count_all DESC").count}
+    scope :avg_rate, ->{votes.average(:rate).round(1)}
 end
   

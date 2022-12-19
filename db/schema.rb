@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_29_031203) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_13_030827) do
   create_table "answers", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -102,7 +102,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_29_031203) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "exam_id", null: false
+    t.integer "user_id", null: false
     t.index ["exam_id"], name: "index_votes_on_exam_id"
+    t.index ["user_id"], name: "index_votes_on_user_id"
   end
 
   add_foreign_key "answers", "exam_passeds"
@@ -116,4 +118,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_29_031203) do
   add_foreign_key "user_tags", "tags"
   add_foreign_key "user_tags", "users"
   add_foreign_key "votes", "exams"
+  add_foreign_key "votes", "users"
 end
