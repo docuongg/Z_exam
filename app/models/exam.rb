@@ -8,8 +8,5 @@ class Exam < ApplicationRecord
     scope :suggestion_exams, -> id{where("tag_id in (select id from user_tags where user_id = ? )", id).includes(:tag)}
     scope :completed_exams, ->{includes(:tag)}
     scope :passed_exams_count, -> {joins(:votes).group(:id).count}
-
-    scope :search, -> params {where("name LIKE ? AND tag_id = ?", "%#{params["key"]}%", "#{params["tag"]}")}
-    scope :find_by_name, -> name {where("name LIKE ?", "%#{name}%")}
 end
   
