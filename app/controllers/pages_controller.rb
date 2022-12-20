@@ -2,7 +2,7 @@ class PagesController < ApplicationController
   def home
     @exam = Exam.ransack()
     @tags = Tag.all
-    if !search_params.blank?
+    if search_params.present?
       @prev_search_tag = params[:q][:tag_id_eq]
       @prev_search_key = params[:q][:name_cont]
 
