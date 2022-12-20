@@ -5,9 +5,9 @@ class PagesController < ApplicationController
       @prev_search_tag = params[:tag]
       @prev_search_key = params[:key]
       if params[:tag] == "All"
-        @exams = Exam.find_by_name(params[:key]).paginate(page: params[:page], per_page: 9)   
+        @exams = Exam.ransack(name_cont: @prev_search_key).result.paginate(page: params[:page], per_page: 9)   
       else
-        @exams = Exam.search(search_params).paginate(page: params[:page], per_page: 9)   
+        @exams = Exam.ransack(name_cont: @prev_search_key, tag_id_eq: @prev_search_tag).result.paginate(page: params[:page], per_page: 9)   
       end
     else
       @new_exams = Exam.new_exams
