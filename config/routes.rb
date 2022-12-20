@@ -11,11 +11,4 @@ Rails.application.routes.draw do
       resources :votes 
     end
   end
-  # devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
-  # devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
-  # get 'exam/:id' => 'exams#detail', :as => 'detail_exam'
-  # get 'exam/do/:id' => 'exams#do', :as => 'do_exam'
-  # post 'exam/mark/:id' => 'exams#mark', :as => 'mark_exam'
-
-  # get 'exam/result/:id' => 'exams#result', :as => 'result_exam'
 end

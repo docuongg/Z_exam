@@ -38,7 +38,7 @@ $('DOMContentLoaded', function(){
                 //current star
                 let cs = parseInt(this.getAttribute("data-star"));
                 //output current clicked star value
-                $('#rate').value = cs;
+                $('#rate').val(cs);
                 /*our first loop to set the class on preceding star elements*/
                 let pre = cs; //set the current star value
                 //loop through and set the active class on preceding stars

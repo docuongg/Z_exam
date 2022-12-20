@@ -91,6 +91,10 @@ gem 'dotenv-rails'
 
 gem 'faker'
 
-gem 'bootstrap-will_paginate'
+gem 'bootstrap'
+
+gem 'will_paginate-bootstrap'
 
 gem 'will_paginate'
+
+gem 'ransack'
