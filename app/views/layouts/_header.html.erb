@@ -6,17 +6,17 @@
     </button>
     <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarSupportedContent">
       <% if current_page?(root_path) %>
-        <form class="d-flex me-auto " action="/" method="GET">
-          <input class="form-control me-2 w-50" type="search" placeholder="Search" name="key" aria-label="Search" value=<%= @prev_search_key%> >
-          <%= select_tag('tag', options_for_select(
-            ["All"] + @tags.map do |tag| 
+        <%= search_form_for @exam, url: url_for(controller: 'pages', action: 'home'), html: {class:"d-flex me-auto "} do |f|%>
+          <%= f.search_field :name_cont, value: @prev_search_key, class:"form-control me-2 w-50"%>
+          <%= f.select(:tag_id_eq, options_for_select(
+            [["All", ""]] + @tags.map do |tag| 
               ([tag.name, tag.id])
             end,
             @prev_search_tag || 'All'
-          ), class:"form-select w-25 me-2"
+          ),{}, :class => "form-select w-25 me-2"
         ) %>
-          <button class="btn btn-outline-primary" type="submit">Search</button>
-        </form>
+          <%= f.submit nil, :class => 'btn btn-primary' %>
+        <% end %>
       <% end %>
       <% if !current_page?(profile_path)%>
         <ul class="navbar-nav mb-2 mb-lg-0 ">

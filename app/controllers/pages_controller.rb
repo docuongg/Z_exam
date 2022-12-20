@@ -1,14 +1,12 @@
 class PagesController < ApplicationController
   def home
+    @exam = Exam.ransack()
     @tags = Tag.all
     if !search_params.blank?
-      @prev_search_tag = params[:tag]
-      @prev_search_key = params[:key]
-      if params[:tag] == "All"
-        @exams = Exam.ransack(name_cont: @prev_search_key).result.paginate(page: params[:page], per_page: 9)   
-      else
-        @exams = Exam.ransack(name_cont: @prev_search_key, tag_id_eq: @prev_search_tag).result.paginate(page: params[:page], per_page: 9)   
-      end
+      @prev_search_tag = params[:q][:tag_id_eq]
+      @prev_search_key = params[:q][:name_cont]
+
+      @exams = Exam.ransack(params[:q]).result.paginate(page: params[:page], per_page: 9)   
     else
       @new_exams = Exam.new_exams
 
@@ -25,6 +23,6 @@ class PagesController < ApplicationController
   private
 
   def search_params
-    params.permit([:key, :tag])
+    params.permit(q: [:name_cont, :tag_id_eq])
   end
 end
