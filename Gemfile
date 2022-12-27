@@ -98,3 +98,9 @@ gem 'will_paginate-bootstrap'
 gem 'will_paginate'
 
 gem 'ransack'
+
+gem 'activeadmin'
+
+gem 'cancancan'
+
+gem 'kaminari'

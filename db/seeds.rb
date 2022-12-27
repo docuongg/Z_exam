@@ -93,3 +93,10 @@ end
         exam_passed_id: rand(1..40)
     )
 end
+
+AdminUser.create!(
+    user_name: 'admin', 
+    email: 'admin@example.com', 
+    password: '123456', 
+    password_confirmation: '123456', 
+    permission: 1) if Rails.env.development?

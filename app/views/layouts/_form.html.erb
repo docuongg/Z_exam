@@ -1,0 +1,21 @@
+<div class="row">
+  <%= f.fields_for :questions, Question.new(exam: @exam) do |ff| %>
+    <div class="col-lg-12">
+      <%= ff.label :title, class:"form-label" %>
+      <%= ff.text_field :title, class:"form-control w-100", placeholder:"Enter the question here !" %>
+      <br/>
+      <div class="row">
+        <% for index in 0..3 %>
+          <%= ff.fields_for :options, @option = Option.new() do |fff| %>
+            <div class="form-check col-lg-6 d-flex">
+              <%# <%= fff.label "o_#{index+1}", class:"form-label" %>
+              <%= fff.radio_button "isCorrect", @option.id , class:"form-check-input" %>
+              <%= fff.text_field :title, class:"form-control", placeholder:"Enter the option here !" %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
+<br/>
