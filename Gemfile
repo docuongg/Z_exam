@@ -104,3 +104,13 @@ gem 'activeadmin'
 gem 'cancancan'
 
 gem 'kaminari'
+
+gem 'jquery-rails'
+
+gem 'font-awesome-sass'
+
+gem 'activeadmin_blaze_theme'
+
+gem 'active_admin_flat_skin'
+
+gem "image_processing"

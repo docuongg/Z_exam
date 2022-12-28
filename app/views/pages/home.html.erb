@@ -18,7 +18,11 @@
                     <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
                       <%= link_to exam_path(exam.id) do %>
                         <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                        <img src=<%= exam.thumbnail_url %> class="img-fluid img-thumbnail w-100" />
+                        <% if exam.image.blank? %>
+                          <img src=<%= exam.thumbnail_url %> class="img-fluid img-thumbnail w-100" />
+                        <% else %>
+                          <%= image_tag exam.image, class:"img-fluid img-thumbnail w-100" %>
+                        <% end %>
                       <% end %>
                     </div>
                     <div class="card-body">
@@ -181,7 +185,9 @@
                 <div class="col col-lg-12 col-xl-12">
                   <h3>Completed Exam</h3>
                   <br/>
-                  <%= will_paginate @completed_exams %>
+                  <div class="digg_pagination">
+                    <%= will_paginate @completed_exams, renderer: BootstrapPagination::Rails %>
+                  </div>
                   <% @completed_exams.each_slice(3) do |group|%>
                     <div class="row g-3 " >
                       <% group.each do |exam_passed| %>

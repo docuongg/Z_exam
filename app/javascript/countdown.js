@@ -21,7 +21,7 @@ jQuery(document).ready(function () {
     countdown = distance - (Date.now() - createTime*1000)
     if (countdown < 0) {
       localStorage.removeItem(`exam_${examId}`);
-      submitB.click();
+      submitButton.click();
       clearInterval(x);
     }
     submitButton.click (function(e) {

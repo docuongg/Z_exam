@@ -14,6 +14,7 @@ ActiveAdmin.setup do |config|
   config.comments = false
   config.authorization_adapter = ActiveAdmin::CanCanAdapter
 
+
   # Set an optional image to be displayed for the header
   # instead of a string (overrides :site_title)
   #

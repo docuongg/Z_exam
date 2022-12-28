@@ -15,11 +15,22 @@ ActiveAdmin.register Exam do
   #   permitted
   # end
   permit_params do
-    permitted = [:name, :description, :timeout, :thumbnail_url, :tag_id]
+    permitted = [:name, :description, :timeout, :thumbnail_url, :image, :tag_id]
     permitted << :other if params[:action] == 'create'
     permitted
   end
   
+  index do
+    selectable_column
+    id_column
+    column :name
+    column :description
+    column :timeout
+    column :created_at
+    column :update_at
+    actions
+  end
+
   controller do
     def new
       @exam = Exam.new()
@@ -28,8 +39,7 @@ ActiveAdmin.register Exam do
     end
 
     def create
-      @exam = Exam.new(exam_params)
-      binding.pry
+      @exam = Exam.create!(exam_params)
       if @exam.save
         redirect_to admin_exams_path
       else
@@ -40,7 +50,7 @@ ActiveAdmin.register Exam do
     private
 
     def exam_params
-      params.require(:exam).permit(:name, :description, :tag_id, :timeout, questions_attributes: [:title, options_attributes: [:title, :isCorrect]])
+      params.require(:exam).permit(:name, :description, :tag_id, :timeout, :image, questions_attributes: [:title, options_attributes: [:title, :isCorrect]])
     end
   end
 end

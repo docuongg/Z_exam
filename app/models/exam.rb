@@ -3,8 +3,9 @@ class Exam < ApplicationRecord
     has_many :exam_passeds, dependent: :destroy
     has_many :votes, dependent: :destroy
     has_many :questions, dependent: :destroy
+    has_one_attached :image
 
-    accepts_nested_attributes_for :questions
+    accepts_nested_attributes_for :questions, reject_if: -> question { question[:title].blank? }
 
     scope :new_exams, ->{order(:created_at)}
     scope :popular_exams, ->{joins(:votes).group(:id).order("COUNT(exams.id) DESC")}
@@ -14,4 +15,3 @@ class Exam < ApplicationRecord
     scope :passed_exams_count, -> {joins(:votes).group(:id).order("count_all DESC").count}
     scope :avg_rate, ->{votes.average(:rate).round(1)}
 end
-  
