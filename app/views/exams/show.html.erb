@@ -2,7 +2,11 @@
 <br/>
 <div class="row">
   <div class="col-md-4">
-    <img class="img-fluid img-thumbnail w-100" src= <%= @exam.thumbnail_url %> alt="">
+    <% if @exam.image.blank? %>
+      <img src=<%= @exam.thumbnail_url %> class="img-fluid img-thumbnail w-100" />
+    <% else %>
+      <%= image_tag @exam.image, class:"img-fluid img-thumbnail w-100" %>
+    <% end %>
   </div>
   <div class="col-md-8">
     <ul class="list-unstyled list-inline mb-0 d-flex">

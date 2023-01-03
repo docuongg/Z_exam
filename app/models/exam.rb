@@ -7,7 +7,7 @@ class Exam < ApplicationRecord
 
     accepts_nested_attributes_for :questions, reject_if: -> question { question[:title].blank? }
 
-    scope :new_exams, ->{order(:created_at)}
+    scope :new_exams, ->{order(created_at: :DESC)}
     scope :popular_exams, ->{joins(:votes).group(:id).order("COUNT(exams.id) DESC")}
     scope :suggestion_exams, -> {where("tag_id IN (SELECT id FROM user_tags WHERE user_id = ? )", id)}
     scope :by_id, -> ids {where(tag_id: ids)}

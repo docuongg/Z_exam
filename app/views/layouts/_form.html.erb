@@ -8,39 +8,69 @@
             <%= ff.text_field :title, class:"form-control w-100", placeholder:"Enter the question here !" %>
           </div>
           <div class="col-lg-1">
-            <button class="btn btn-danger btn-sm rounded-0 delete-btn" type="button" data-toggle="tooltip" data-placement="top" title="Delete">
+            <button class="btn btn-danger btn-sm rounded-0 delete-question-btn" type="button" data-toggle="tooltip" data-placement="top" title="delete-question">
               <i class="fa fa-trash"></i>
             </button>
           </div>
         </div>
         <br/>
-        <div class="row">
+        <div class="row options-box">
           <% for index in 0..3 %>
             <%= ff.fields_for :options, @option = Option.new() do |fff| %>
               <div class="form-check col-lg-6 d-flex">
-                <%= fff.radio_button :isCorrect, 1 ,:check => true, class:"" %>
-                <%= fff.text_field :title, class:"form-control m-1", placeholder:"Enter the option here !" %>
+                <div class="col-lg-11 d-inline-flex">
+                  <%= fff.radio_button :isCorrect, 1 ,:check => true, class:"" %>
+                  <%= fff.text_field :title, class:"form-control m-1", placeholder:"Enter the option here !" %>
+                </div>
               </div>
             <% end %>
           <% end %>
+        </div>
+        <button class="btn btn-danger btn-sm rounded-0 add-option" type="button" data-toggle="tooltip" data-placement="top" title="add-option">
+          <i class="fa fa-plus"></i>
+        </button>
+        <div class="delete-option d-none">
+          <button class="btn btn-danger btn-sm rounded-0 my-1 delete-option-btn" type="button" data-toggle="tooltip" data-placement="top" title="delete-option">
+            <i class="fa fa-trash"></i>
+          </button>
+          <script>
+            $('.delete-option-btn').on('click', function() {
+              $(this).parent().remove();
+            });
+          </script>
         </div>
       </div>
     <% end %>
   </div>
   <br/>
   <script>
-    var index1 = 0
-    $('input[type=radio]').change(function() {
-      index1 = $(this).closest('.question-box').index();
-      $(`#questions-box > :nth-child(${index1+1}) input[type=radio]`).change(function() {
+    $(document).ready(function() {
+      var index1 = 0
 
+      $('input[type=radio]').change(function() {
+        index1 = $(this).closest('.question-box').index();
         $(`#questions-box > :nth-child(${index1+1}) input[type=radio]`).not(this).prop('checked', false);
+      });
 
+      $('.delete-question-btn').off().on('click', function() {
+        $(this).closest('.question-box').remove()
+      });
+
+      $('.add-option').off().on('click', function() {
+        index = Date.now()
+        var indexQuestion = $(this).closest('.question-box').index()
+        var temp = $('.question-box.d-none .form-check:first-child').wrap('<p/>').parent().html().replaceAll('questions_attributes][0][options_attributes][0', `questions_attributes][${indexQuestion}][options_attributes][${index}`)
+        .replace('</div>','').concat($('.delete-option.d-none').html()).concat('</div>')
+        console.log(temp)
+        $('.question-box.d-none .form-check:first-child').unwrap();
+
+        $(this).prev().append(temp)
+
+        $('input[type=radio]').change(function() {
+          index1 = $(this).closest('.question-box').index();
+          $(`#questions-box > :nth-child(${index1+1}) input[type=radio]`).not(this).prop('checked', false);
+        });
       });
     });
-
-    $('.delete-btn').on('click', function() {
-      $(this).closest('.question-box').remove()
-    })
   </script>
 </div>

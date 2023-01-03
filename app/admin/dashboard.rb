@@ -19,7 +19,7 @@ ActiveAdmin.register_page "Dashboard" do
     #         Post.recent(5).map do |post|
     #           li link_to(post.title, admin_post_path(post))
     #         end
-    #       end
+    #       endT
     #     end
     #   end
 

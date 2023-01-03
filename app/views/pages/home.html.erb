@@ -92,7 +92,11 @@
                         <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
                           <%= link_to exam_path(exam.id) do %>
                             <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                            <img src=<%= exam.thumbnail_url %> class="img-fluid img-thumbnail" />
+                            <% if exam.image.blank? %>
+                              <img src=<%= exam.thumbnail_url %> class="img-fluid img-thumbnail w-100" />
+                            <% else %>
+                              <%= image_tag exam.image, class:"img-fluid img-thumbnail w-100" %>
+                            <% end %>
                           <% end %>
                         </div>
                         <div class="card-body">
