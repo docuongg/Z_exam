@@ -50,7 +50,7 @@ ActiveAdmin.register Exam do
     private
 
     def exam_params
-      params.require(:exam).permit(:name, :description, :tag_id, :timeout, :image, questions_attributes: [:title, options_attributes: [:title, :isCorrect]])
+      params.require(:exam).permit(:name, :description, :tag_id, :timeout, :image, questions_attributes: [:title, options_attributes: [:title, :is_correct]])
     end
   end
 end

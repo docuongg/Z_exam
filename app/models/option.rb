@@ -4,5 +4,5 @@ class Option < ApplicationRecord
 
     validates :title, presence: true
 
-    scope :get_correct_option, -> exam_id {where("exam_id = ?", exam_id).joins(:question).where("options.isCorrect = true")}
+    scope :get_correct_option, -> exam_id {where("exam_id = ?", exam_id).joins(:question).where("options.is_correct = true")}
 end

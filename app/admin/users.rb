@@ -9,6 +9,8 @@ ActiveAdmin.register User do
   #
   # or
   #
+  # has_many :exam_passeds, dependent: :destroy
+
   permit_params do
     permitted = [:full_name, :email, :admin, :password, :password_confirmation, :encrypted_password, :uid, :avatar_url, :provider, :reset_password_token, :reset_password_sent_at, :remember_created_at, :username]
     permitted << :other if params[:action] 
@@ -39,5 +41,13 @@ ActiveAdmin.register User do
       f.input :password_confirmation
     end
     f.actions
+  end
+
+  controller do
+    def show
+      @user = User.find(params[:id])
+      @passed_exams = @user.exam_passeds.best_completed_exams
+      render 'admin/users/show', :layout =>"active_admin"
+    end
   end
 end

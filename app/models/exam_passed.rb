@@ -27,5 +27,5 @@ class ExamPassed < ApplicationRecord
     def set_name
         self.name = Exam.find(exam_id).name
     end
-
+    
 end

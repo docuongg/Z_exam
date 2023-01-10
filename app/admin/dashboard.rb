@@ -9,25 +9,24 @@ ActiveAdmin.register_page "Dashboard" do
         small I18n.t("active_admin.dashboard_welcome.call_to_action")
       end
     end
+  end 
 
-    # Here is an example of a simple dashboard with columns and panels.
-    #
-    # columns do
-    #   column do
-    #     panel "Recent Posts" do
-    #       ul do
-    #         Post.recent(5).map do |post|
-    #           li link_to(post.title, admin_post_path(post))
-    #         end
-    #       endT
-    #     end
-    #   end
+  controller do
+    def index
+      if filter_date_params.present?
+        @from_date = params[:from]
+        @to_date = params[:to]
+      else
+        @from_date = 1.weeks.ago
+        @to_date = Time.now
+      end
+      render 'admin/dashboard/index', :layout =>"active_admin"
+    end
 
-    #   column do
-    #     panel "Info" do
-    #       para "Welcome to ActiveAdmin."
-    #     end
-    #   end
-    # end
-  end # content
+    private
+
+    def filter_date_params
+      params.permit(:from, :to)
+    end
+  end
 end

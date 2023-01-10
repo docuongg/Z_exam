@@ -1,12 +1,11 @@
 <br/>
-<br/>
 <div class="row">
   <div class="col-md-4">
     <ul class="list-unstyled list-inline mb-0 d-flex">
       <h3 class="my-3"><%= @exam_passed.name %></h3>
     </ul>
     <hr class="mt-0 mb-4">
-    <h3 class="my-3">Exam Result</h3>
+    <h3 class="my-3">View Exam Result</h3>
     <ul>
       <li>Score : 
         <%= @exam_passed.score %>/100
@@ -19,7 +18,7 @@
       <li>Finish at :  <%= @exam_passed.updated_at.strftime("%-d/%-m/%y: %H:%M %Z") %></li>
     </ul>
     <div style="z-index: 1; width: 150px;">
-      <%= link_to "Back to home", root_path, class:"btn btn-outline-primary d-flex justify-content-center"  %>
+      <%= link_to "Back", :back, class:"btn btn-outline-primary d-flex justify-content-center"  %>
     </div>
   </div>
   <div class="col-md-8">

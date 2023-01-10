@@ -19,7 +19,7 @@
             <%= ff.fields_for :options, @option = Option.new() do |fff| %>
               <div class="form-check col-lg-6 d-flex">
                 <div class="col-lg-11 d-inline-flex">
-                  <%= fff.radio_button :isCorrect, 1 ,:check => true, class:"" %>
+                  <%= fff.radio_button :is_correct, 1 ,:check => true, class:"" %>
                   <%= fff.text_field :title, class:"form-control m-1", placeholder:"Enter the option here !" %>
                 </div>
               </div>
