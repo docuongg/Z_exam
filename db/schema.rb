@@ -80,9 +80,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_11_144357) do
 
   create_table "exam_passeds", force: :cascade do |t|
     t.string "name"
-    t.integer "numberOfQuestion"
+    t.integer "number_of_question"
     t.integer "score"
-    t.datetime "finishAt"
+    t.datetime "finish_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "exam_id", null: false

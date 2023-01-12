@@ -5,12 +5,12 @@ ActiveAdmin.register ExamPassed do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :name, :numberOfQuestion, :score, :finishAt, :exam_id, :user_id
+  # permit_params :name, :number_of_question, :score, :finish_at, :exam_id, :user_id
   #
   # or
   #
   permit_params do
-    permitted = [:name, :numberOfQuestion, :score, :finishAt, :exam_id, :user_id]
+    permitted = [:name, :number_of_question, :score, :finish_at, :exam_id, :user_id]
     permitted << :other if params[:action] == 'create' 
     permitted
   end

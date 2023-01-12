@@ -58,11 +58,11 @@
   });
 
   $('input[type=submit]').on('click', function(e) {
-    numberOfQuestions = $(".question-box:last").index();
+    number_of_questions = $(".question-box:last").index();
 
     numberOfRadioChecked = $('input[type=radio]:checked').length;
 
-    if ( numberOfQuestions != numberOfRadioChecked ){
+    if ( number_of_questions != numberOfRadioChecked ){
       alert('Please check all correct option !')
       e.preventDefault();
     }
