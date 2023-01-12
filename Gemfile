@@ -118,3 +118,7 @@ gem "image_processing"
 gem "chartkick"
 
 gem "groupdate"
+
+# gem "noticed"
+
+gem "hotwire-rails"

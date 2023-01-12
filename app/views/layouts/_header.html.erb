@@ -28,6 +28,17 @@
               <%= link_to 'SignUp', new_user_registration_path, class:"nav-link active" %>
             </li>
           <% else %>
+            <div class="btn-group dropstart">
+              <a class="nav-link dropdown-toggle me-3" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-bell">
+                </i>
+              </a>
+              <ul class="dropdown-menu" style="width: 350px">
+                <%= turbo_frame_tag "notifications" do %>
+                  <%= render "notifications/notifications", user: current_user %>
+                <% end %>
+              </ul>
+            </div>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle me-3" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src= <%= current_user.avatar_url%> class="rounded-circle" height="25" alt="Black and White Portrait of a Man" loading="lazy"/> <%= current_user.username%>

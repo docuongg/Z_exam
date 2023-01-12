@@ -249,7 +249,9 @@
                 <div class="col col-lg-12 col-xl-12">
                   <h3>Suggestion Exam</h3>
                   <br/>
-                  <%= will_paginate @suggestion_exams %>
+                  <div class="digg_pagination">
+                    <%= will_paginate @suggestion_exams, renderer: BootstrapPagination::Rails %>
+                  </div>
                   <% @suggestion_exams.each_slice(3) do |group|%>
                     <div class="row g-3 " >
                       <% group.each do |exam| %>

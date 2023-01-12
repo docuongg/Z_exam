@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_28_082519) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_11_144357) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -102,6 +102,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_28_082519) do
     t.index ["tag_id"], name: "index_exams_on_tag_id"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.string "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.integer "exam_id", null: false
+    t.index ["exam_id"], name: "index_notifications_on_exam_id"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
   create_table "options", force: :cascade do |t|
     t.string "title"
     t.boolean "is_correct"
@@ -171,6 +181,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_28_082519) do
   add_foreign_key "exam_passeds", "exams"
   add_foreign_key "exam_passeds", "users"
   add_foreign_key "exams", "tags"
+  add_foreign_key "notifications", "exams"
+  add_foreign_key "notifications", "users"
   add_foreign_key "options", "questions"
   add_foreign_key "questions", "exams"
   add_foreign_key "user_tags", "tags"

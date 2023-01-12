@@ -9,15 +9,12 @@
 # generate 20 users
 (1..20).each do |id|
     User.create!(
-# each user is assigned an id from 1-20
         full_name: Faker::Name.name,
         username: Faker::Internet.email.split('@')[0],
         email: Faker::Internet.email,
-# issue each user the same password
         password: "Cuongptit1.", 
         password_confirmation: "Cuongptit1.",
         avatar_url: Faker::Avatar.image
-# a user can have only one of these roles
     )
 end
 
@@ -42,7 +39,6 @@ end
         description: Faker::Movie.quote,
         thumbnail_url: Faker::Avatar.image,
         timeout: id*10
-        
     )
 end
 
@@ -62,11 +58,6 @@ end
         user_id: rand(1..20)
     )
 end
-
-    # Completed exams
-    # sql1 = "select * from exam_passeds
-    # where user_id = #{@user.id}"
-    # @completed_exams = ExamPassed.find_by_sql(sql1)
 
 (1..200).each do |id|
     Question.create!(

@@ -4,8 +4,7 @@ class User < ApplicationRecord
   has_many :exams, through: :exam_passeds
   has_many :votes, dependent: :destroy
   has_many :tags, through: :user_tags
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  has_many :notifications, dependent: :destroy
   devise :omniauthable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, omniauth_providers: [:google_oauth2],
          authentication_keys: [:login]
