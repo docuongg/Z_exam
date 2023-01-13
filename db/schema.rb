@@ -80,9 +80,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_28_082519) do
 
   create_table "exam_passeds", force: :cascade do |t|
     t.string "name"
-    t.integer "numberOfQuestion"
+    t.integer "number_of_question"
     t.integer "score"
-    t.datetime "finishAt"
+    t.datetime "finish_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "exam_id", null: false
@@ -104,7 +104,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_28_082519) do
 
   create_table "options", force: :cascade do |t|
     t.string "title"
-    t.boolean "isCorrect"
+    t.boolean "is_correct"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "question_id", null: false

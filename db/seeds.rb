@@ -80,7 +80,7 @@ end
     (0..3).each do |b|
         Option.create!(
             title: Faker::Lorem.paragraph(sentence_count: 2),
-            isCorrect: a == b ? true : false,
+            is_correct: a == b ? true : false,
             question_id: id
         )
     end

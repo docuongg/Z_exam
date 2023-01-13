@@ -43,7 +43,7 @@
   </div>
   <div class="col-md-8" style="height: 83vh; overflow-y: scroll">
     <%= form_for @exam_passed, url: exam_exam_passed_path(@exam_passed.exam.id, @exam_passed.id) do |f|%>
-      <%= f.hidden_field :finishAt, value: Time.now() %>
+      <%= f.hidden_field :finish_at, value: Time.now() %>
       <div class="container mb-5">
         <% @exam_passed.exam.questions.each_with_index do |question, index| %>
           <div class="row">

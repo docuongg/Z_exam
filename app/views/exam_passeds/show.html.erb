@@ -36,7 +36,7 @@
                   <% if @exam_passed.answers.map(&:option_id).include? option.id %>
                     <input class="form-check-input" type="radio" value="" id="flexCheckDefault" checked disabled>
                     <label class="form-check-label" for="flexCheckDefault"
-                        <% if option.isCorrect == true %>
+                        <% if option.is_correct == true %>
                             style="color:green;" 
                         <% else %>
                             style="color:red;" 
@@ -47,7 +47,7 @@
                   <% else %>
                     <input class="form-check-input" type="radio" value="" id="flexCheckDefault" disabled>
                     <label class="form-check-label" for="flexCheckDefault"
-                        <% if option.isCorrect == true %>
+                        <% if option.is_correct == true %>
                             style="color:green;" 
                         <% end %>
                     >

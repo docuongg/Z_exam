@@ -1,11 +1,14 @@
-<div class="question-box d-none">
+<div class="question-box">
   <div class="row">
     <%= f.fields_for :questions, Question.new(exam: @exam) do |ff| %>
-      <div class="col-lg-12">
+      <div class="col-lg-12 question-f">
         <%= ff.label :title, class:"form-label" %>
         <div class="row">
           <div class="col-lg-11">
-            <%= ff.text_field :title, class:"form-control w-100", placeholder:"Enter the question here !" %>
+            <div class="question-hidden-field">
+              <%= ff.hidden_field :id, value: question.id %>
+            </div>
+            <%= ff.text_field :title, value: question.title, class:"form-control w-100", placeholder:"Enter the question here !" %>
           </div>
           <div class="col-lg-1">
             <button class="btn btn-danger btn-sm rounded-0 delete-question-btn" type="button" data-toggle="tooltip" data-placement="top" title="delete-question">
@@ -15,13 +18,21 @@
         </div>
         <br/>
         <div class="row options-box">
-          <% for index in 0..3 %>
+          <% for index in 0...options.length %>
             <%= ff.fields_for :options, @option = Option.new() do |fff| %>
               <div class="form-check col-lg-6 d-flex">
                 <div class="col-lg-11 d-inline-flex">
-                  <%= fff.radio_button :is_correct, true, :check => true, class:"" %>
-                  <%= fff.text_field :title, class:"form-control m-1", placeholder:"Enter the option here !" %>
+                  <div class="hidden-field">
+                    <%= fff.hidden_field :id, value: options[index].id %>
+                  </div>
+                  <%= fff.radio_button :is_correct, 1 ,:check => true, :checked => options[index].is_correct, class:"" %>
+                  <%= fff.text_field :title, value: options[index].title, class:"form-control m-1", require: true, placeholder:"Enter the option here !" %>
                 </div>
+                <% if index > 3 %>
+                  <button class="btn btn-danger btn-sm rounded-0 my-1 delete-option-btn" type="button" data-toggle="tooltip" data-placement="top" title="delete-option">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                <% end %>
               </div>
             <% end %>
           <% end %>
@@ -35,8 +46,11 @@
           </button>
           <script>
             $('.delete-option-btn').on('click', function() {
-
-              $(this).parent().remove();
+              tempId = $(this).prev().find(".hidden-field").html()
+              tempDestroy = $(this).prev().find(".hidden-field").html().replace("[id]", "[_destroy]")
+              $(this).parent().parent().append(tempId)
+              $(this).parent().parent().append(tempDestroy)
+              $(this).parent().remove()
             });
           </script>
         </div>
@@ -54,15 +68,22 @@
       });
 
       $('.delete-question-btn').off().on('click', function() {
+        // console.log($(this).parent().prev().find(".question-hidden-field").html())
+        tempId = $(this).parent().prev().find(".question-hidden-field").html()
+        tempDestroy = $(this).parent().prev().find(".question-hidden-field").html().replace("[id]", "[_destroy]")
+        $(this).closest('.question-box').parent().append(tempId)
+        $(this).closest('.question-box').parent().append(tempDestroy)
         $(this).closest('.question-box').remove()
+        // $(this).closest('.question-box').remove()
+
       });
 
       $('.add-option').off().on('click', function() {
         index = Date.now()
+
         var indexQuestion = $(this).closest('.question-box').index()
-        var temp = $('.question-box.d-none .form-check:first-child').wrap('<p/>').parent().html().replaceAll('questions_attributes][0][options_attributes][0', `questions_attributes][${indexQuestion}][options_attributes][${index}`)
-        .replace('</div>','').concat($('.delete-option.d-none').html()).concat('</div>')
-        console.log(temp)
+        var temp = $('.question-box.d-none .form-check:first-child').wrap('<p/>').parent().html().replaceAll('questions_attributes][0][options_attributes][0', `questions_attributes][${indexQuestion}][options_attributes][${index}`).replaceAll('placeholder', 'required = "true" placeholder').replace('</div>','').concat($('.delete-option.d-none').html()).concat('</div>')
+
         $('.question-box.d-none .form-check:first-child').unwrap();
 
         $(this).prev().append(temp)
