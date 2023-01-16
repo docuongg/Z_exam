@@ -1,14 +1,16 @@
 <% if user_signed_in? && @notifications.present? %>
   <div class="container">
-    <h5>Notification</h5>
+    <div class="row">
+      <div class="col-9">
+        <h5>Notification</h5>
+      </div>
+      <div class="col-3">
+        <div style="z-index: 1; width: 50px;"><%= link_to "All", notifications_path, class:"btn btn-outline-primary d-flex justify-content-center"  %></div>
+      </div>
+    </div>
     <hr/>
     <div style="height: 300px; overflow-y: scroll">
-      <%= turbo_stream_from "notification_#{user.id}" %>
-      <%= turbo_frame_tag "notifications_#{user.id}" do %>
-        <% @notifications.each do |notification| %>
-          <%= render notification %>
-        <% end %>
-      <% end %>
+      <%= render @notifications %>
     </div>
   </div>
 <% end %>
