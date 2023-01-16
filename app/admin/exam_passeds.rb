@@ -23,5 +23,4 @@ ActiveAdmin.register ExamPassed do
   #     render 'admin/exam_passeds/show', :layout =>"active_admin"
   #   end
   # end
-
 end

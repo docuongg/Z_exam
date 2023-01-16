@@ -47,6 +47,10 @@ ActiveAdmin.register Exam do
       end
     end
 
+    def show
+      @exam = Exam.find(params[:id])
+      render 'admin/exams/show', :layout =>"active_admin"
+    end
     private
 
     def exam_params

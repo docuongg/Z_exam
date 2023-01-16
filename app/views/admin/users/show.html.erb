@@ -110,7 +110,7 @@
                     <p class="text-muted mb-0"><%= passed_exam.name %></p>
                   </div>
                   <div class="col-sm-1">
-                    <%= link_to admin_user_exam_passed_path(passed_exam.user_id, passed_exam.id) , class:"btn btn-outline-primary d-flex justify-content-center" do %>
+                    <%= link_to admin_user_exam_passed_path(passed_exam.user_id, passed_exam.id), method: :get, class:"btn btn-outline-primary d-flex justify-content-center" do %>
                       <i class="fa fa-eye" ></i>
                     <% end %>
                   </div>
